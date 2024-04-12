@@ -14,9 +14,7 @@ public class Employee implements Comparable<Employee>{
 	}
 	@Override
 	public int compareTo(Employee o) {
-		// TODO 
-		//comparing according to id
-		return 0;
+		return Long.compare(id, o.id);
 	}
 	public long getId() {
 		return id;
@@ -26,6 +24,9 @@ public class Employee implements Comparable<Employee>{
 	}
 	public String getDepartment() {
 		return department;
+	}
+	public int computeSalary() {
+		return basicSalary;
 	}
 	@Override
 	public int hashCode() {

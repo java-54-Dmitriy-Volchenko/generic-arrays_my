@@ -94,6 +94,17 @@ String[] stringsMin = {"abc", "lmn", "123",  "y"};
 		 assertArrayEquals(expected, actual);
 	 }
 	 @Test
+	 void insertTest() {
+		 Integer number = 10;
+		 Integer[] expectedFirst = {number, 100, -3, 23, 4, 8, 41, 56, -7};
+		 Integer[] expectedLast = {100, -3, 23, 4, 8, 41, 56, -7, number};
+		 Integer[] expectedMiddle = {100, -3, 23, 4, number, 8, 41, 56, -7};
+		 assertArrayEquals(expectedFirst, Arrays.insert(numbers, 0, number));
+		 assertArrayEquals(expectedLast, Arrays.insert(numbers, numbers.length,
+				 number));
+		 assertArrayEquals(expectedMiddle, Arrays.insert(numbers, 4, number));
+	 }
+	 @Test
 	 void personsSortTest() {
 		 Person prs1 = new Person(123, 1985);
 		 Person prs2 = new Person(120, 2000);

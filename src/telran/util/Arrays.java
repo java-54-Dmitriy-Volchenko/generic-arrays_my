@@ -43,9 +43,9 @@ public class Arrays {
 			}
 		}
 	}
+	@SuppressWarnings("unchecked")
 	public static <T> void bubbleSort(T[] array) {
-		//TODO
-		//research: write the code based on the existing one of bubbleSort with comparator
+		bubbleSort(array, (Comparator<T>)Comparator.naturalOrder());
 	}
 	
 	private static <T> void swap(T[] array, int i, int j) {
@@ -102,5 +102,19 @@ public class Arrays {
 	}
 	public static <T> T[] copy(T[] array) {
 		return java.util.Arrays.copyOf(array, array.length);
+	}
+	public static <T> T[] insert(T[] array, int index, T element) {
+		T[] result = java.util.Arrays.copyOf(array, array.length + 1);
+		System.arraycopy(array, index, result, index + 1, array.length - index);
+		result[index] = element;
+		return result;
+	}
+	public static <T> T[] insertSorted(T[] array, T element,
+			Comparator<T> comp) {
+		int index = binarySearch(array, element, comp);
+		if (index < 0) {
+			index = - (index + 1);
+		}
+		return insert(array, index, element);
 	}
 }
