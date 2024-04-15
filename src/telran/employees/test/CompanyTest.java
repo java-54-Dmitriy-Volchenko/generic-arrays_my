@@ -2,6 +2,7 @@ package telran.employees.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -21,10 +22,15 @@ private static final int SALARY3 = 3000;
 private static final String DEPARTMENT2 = "QA";
 private static final long ID4 = 200;
 private static final String DEPARTMENT4 = "Audit";
+private static final int WAGE1 = 100;
+private static final int HOURS1 = 10;
+private static final float FACTOR1 = 2;
+private static final float PERCENT1 = 0.01f;
+private static final long SALES1 = 10000;
 //FIXME there should be at least one object for all classes (WageEmployee, Manager, SalesPerson)
-Employee empl1 = new Employee(ID1, SALARY1, DEPARTMENT1);
-Employee empl2 = new Employee(ID2, SALARY2, DEPARTMENT1);
-Employee empl3 = new Employee(ID3, SALARY3, DEPARTMENT2);
+Employee empl1 = new WageEmployee(ID1, SALARY1, DEPARTMENT1, WAGE1, HOURS1);
+Employee empl2 = new Manager(ID2, SALARY2, DEPARTMENT1, FACTOR1);
+Employee empl3 = new SalesPerson(ID3, SALARY3, DEPARTMENT2, WAGE1, HOURS1, PERCENT1, SALES1);
 Company company;
 @BeforeEach
 void setCompany() {
@@ -59,7 +65,8 @@ void setCompany() {
 	@Test
 	void testGetDepartmentBudget() {
 		//FIXME there should be another value for budget's of DEPARTMENT1
-		assertEquals(SALARY1 + SALARY2, company.getDepartmentBudget(DEPARTMENT1));
+		assertEquals(SALARY1 + WAGE1 * HOURS1 + SALARY2 * FACTOR1, company.getDepartmentBudget(DEPARTMENT1));
+		assertEquals(SALARY3 + WAGE1 * HOURS1 + PERCENT1 * SALES1 / 100, company.getDepartmentBudget(DEPARTMENT2));
 		assertEquals(0, company.getDepartmentBudget(DEPARTMENT4));
 	}
 
@@ -76,7 +83,9 @@ void setCompany() {
 	}
 	@Test
 	void testGetDepartments() {
-		//TODO
+		String [] expected = {DEPARTMENT1, DEPARTMENT2};
+		Arrays.sort(expected);
+		assertArrayEquals(expected, company.getDepartments());
 	}
 
 }

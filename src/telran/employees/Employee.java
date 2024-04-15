@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Employee implements Comparable<Employee>{
 	private long id;
-	protected int basicSalary;
+	private int basicSalary;
 	private String department;
 	
 	public Employee(long id, int basicSalary, String department) {
