@@ -87,5 +87,9 @@ void setCompany() {
 		Arrays.sort(expected);
 		assertArrayEquals(expected, company.getDepartments());
 	}
+	@Test
+	void testGetManagersWithMostFactor() {
+		//TODO
+	}
 
 }

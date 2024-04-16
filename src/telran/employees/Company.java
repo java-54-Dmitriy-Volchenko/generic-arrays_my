@@ -73,6 +73,11 @@ public class Company implements Iterable<Employee>{
 		return result;
 		
 	}
+	public Manager[] getManagersWithMostFactor() {
+		//TODO
+		//returns array of managers with the most factor value
+		return null;
+	}
 	private class CompanyIterator implements Iterator<Employee> {
 		int currentIndex = 0;
 		//iterating all employees in the ascending order of the ID values

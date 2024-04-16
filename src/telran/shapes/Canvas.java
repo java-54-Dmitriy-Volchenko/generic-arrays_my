@@ -3,10 +3,11 @@ package telran.shapes;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import telran.shapes.exceptions.ShapeAlreadyExistsException;
 import telran.util.Arrays;
 
 public class Canvas extends Shape implements Iterable<Shape>{
-	private Shape[] shapes = new Shape[0];
+	protected Shape[] shapes = new Shape[0];
 	public Canvas(long id) {
 		super(id);
 		
@@ -29,9 +30,13 @@ public class Canvas extends Shape implements Iterable<Shape>{
 		return result;
 	}
 	public void addShape(Shape shape) {
+		if(Arrays.indexOf(shapes, shape) > -1) {
+			throw new ShapeAlreadyExistsException(shape.id);
+		}
 		shapes = Arrays.add(shapes, shape);
 	}
 	public void removeShape(long id) {
+		//FIXME see UML diagram
 		shapes = Arrays.removeIf(shapes, s -> s.getId() == id);
 	}
 	@Override
