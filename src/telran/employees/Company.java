@@ -74,9 +74,25 @@ public class Company implements Iterable<Employee>{
 		
 	}
 	public Manager[] getManagersWithMostFactor() {
-		//TODO
-		//returns array of managers with the most factor value
-		return null;
+		Manager[] result = new Manager[0];
+		float[] maxFactor = {0};
+		for (Employee empl: employees) {
+			if(empl instanceof Manager) {
+				result = updateResult(result, (Manager)empl, maxFactor);
+			}
+		}
+		return result;
+	}
+	private Manager[] updateResult(Manager[] managers, Manager manager,
+			float[] maxFactor) {
+		Manager[] result = managers;
+		if(manager.factor == maxFactor[0]) {
+			result = Arrays.add(result, manager);
+		} else if(manager.factor > maxFactor[0]) {
+			result = new Manager[] {manager};
+			maxFactor[0] = manager.factor;
+		}
+		return result;
 	}
 	private class CompanyIterator implements Iterator<Employee> {
 		int currentIndex = 0;
