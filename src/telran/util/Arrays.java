@@ -117,4 +117,41 @@ public class Arrays {
 		}
 		return insert(array, index, element);
 	}
+	  public static <T> int lastIndexOf(T[] array, T element) {
+	        int lastIndex = array.length - 1; 
+	        while (lastIndex >= 0 && !array[lastIndex].equals(element)) {
+	            lastIndex--; 
+	        }
+	        return lastIndex; 
+	    }
+	  public static <T> int countIf(T[] array, Predicate<T> predicate) {
+	        int count = 0;
+	        for (T element : array) {
+	            if (predicate.test(element)) {
+	                count++;
+	            }
+	        }
+	        return count;
+	    }
+	  public static <T> T[] removeDuplicates(T[] array) {
+		    T[] uniqueArray = java.util.Arrays.copyOf(array, array.length);
+		    int uniqueCount = 0;
+		    int i = 0;
+		    while (i < uniqueArray.length) {
+		        boolean isDuplicate = false;
+		        int j = 0;
+		        while (j < i) {
+		            if (equals(uniqueArray[i], uniqueArray[j])) {
+		                isDuplicate = true;		               
+		                j = i;
+		            }
+		            j++;
+		        }
+		        if (!isDuplicate) {
+		            uniqueArray[uniqueCount++] = uniqueArray[i];
+		        }
+		        i++;
+		    }
+		    return java.util.Arrays.copyOf(uniqueArray, uniqueCount);
+		}
 }
